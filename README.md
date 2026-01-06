@@ -2,7 +2,7 @@
 
 ![Neovim](https://img.shields.io/badge/Neovim-v0.11.5+-blue)
 ![License](https://img.shields.io/github/license/JacobCodeShow/NeoVim-Config)
-
+![NeoConfig Doctor](https://github.com/JacobCodeShow/NeoVim-Config/actions/workflows/neoconfig-doctor.yml/badge.svg)
 
 
 > This is a **personal, self-maintained Neovim configuration**.
