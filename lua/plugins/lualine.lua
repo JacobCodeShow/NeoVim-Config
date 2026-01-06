@@ -1,5 +1,6 @@
 -- ~/.config/nvim/lua/plugins/lualine.lua
 
+local version = require("core.version").version
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
@@ -50,6 +51,9 @@ return {
           "encoding",
           "fileformat",
           "filetype",
+          function()
+            return "NVIM v" .. version
+          end,
         },
 
         lualine_y = { "progress" },

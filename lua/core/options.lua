@@ -51,3 +51,6 @@ opt.splitright = true
 -- 弱化视觉噪音
 opt.showmode = false
 opt.laststatus = 3   -- 全局状态栏
+
+
+vim.o.completeopt = "menu,menuone,noselect"

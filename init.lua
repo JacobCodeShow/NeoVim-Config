@@ -6,4 +6,7 @@ vim.g.maplocalleader = " "
 
 require("core.options")
 require("core.keymaps")
+require("core.autocmd")
+require("core.neoconfig")
+require("core.terminal")
 require("config.lazy")

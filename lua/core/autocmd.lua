@@ -17,3 +17,18 @@ vim.api.nvim_create_autocmd("BufLeave", {
   end,
 })
 
+-- core/autocmds.lua
+local version = require("core.version").version
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.notify("NeoVim-Config v" .. version, vim.log.levels.INFO)
+  end,
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    require("core.NeoConfigModule.luarc").ensure()
+  end,
+})
+

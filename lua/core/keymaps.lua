@@ -19,25 +19,27 @@ map("n", "<leader>sx", "<C-w>c", opts)
 -- insert fast exit
 map("i", "jk", "<Esc>", opts)
 
--- ===============================
--- Smart Toggle Terminal (Bottom)
--- ===============================
-local function smart_toggle_term()
-  -- 如果当前在 nvim-tree，先跳到右侧代码窗口
-  if vim.bo.filetype == "NvimTree" then
-    vim.cmd("wincmd l")
-  end
+local term = require("core.terminal")
 
-  -- 如果当前只有一个窗口，避免终端“吃掉”编辑区
-  if #vim.api.nvim_list_wins() == 1 then
-    vim.cmd("belowright split")
-    vim.cmd("wincmd k")
-  end
+-- 主终端
+map("n", "<C-\\>", term.toggle_main, { desc = "Main terminal" })
 
-  vim.cmd("ToggleTerm direction=horizontal")
-end
+-- Build 终端
+map("n", "<leader>tb", term.toggle_build, { desc = "Build terminal" })
 
-map("n", "<C-\\>", smart_toggle_term, { desc = "Smart Toggle Terminal (Bottom)" })
+-- SSH / BMC
+-- map("n", "<leader>ts", function()
+--   term.toggle_ssh("ssh root@192.168.1.100")
+-- end, { desc = "SSH terminal" })
+
+-- 一次性命令
+map("n", "<leader>tr", function()
+  term.run_once("htop")
+end, { desc = "Run once command" })
+
+-- terminal 模式退出
+map("t", "<Esc>", [[<C-\><C-n>]])
+
 
 -- Ctrl + b 打开侧边栏
 map("n", "<C-b>", "<cmd>NvimTreeFindFileToggle<CR>", {
