@@ -1,4 +1,7 @@
  # NeoVim-Config
+
+![Neovim](https://img.shields.io/badge/Neovim-v0.11.5+-blue)
+![License](https://img.shields.io/github/license/JacobCodeShow/NeoVim-Config)
  
 這是我的個人 **Neovim** 設定倉庫，用於打造一個現代、可擴充、適合工程開發的編輯器環境。\
 本設定以 **Lua + lazy.nvim（插件管理器）** 為基礎，方便長期維護與擴展。
