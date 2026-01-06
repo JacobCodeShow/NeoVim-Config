@@ -3,19 +3,21 @@
 ![Neovim](https://img.shields.io/badge/Neovim-v0.11.5+-blue)
 ![License](https://img.shields.io/github/license/JacobCodeShow/NeoVim-Config)
 
+
+
 > This is a **personal, self-maintained Neovim configuration**.
 > It does NOT aim to be a full-featured distribution like LazyVim or LunarVim.
 > The goal is clarity, control, and long-term maintainability.
 
 
-這是我的個人 **Neovim** 設定倉庫，用於打造一個現代、可擴充、適合工程開發的編輯器環境。\
-本設定以 **Lua + lazy.nvim（插件管理器）** 為基礎，方便長期維護與擴展。
- 
-本設定特別適用於：
-- C / C++ / Python / Shell 開發
-- Linux / macOS / WSL 環境
-- 嵌入式開發、BMC / OpenBMC 專案
-- 希望以 Neovim 取代傳統 IDE 的開發者
+这是我的个人 **Neovim** 设定仓库，用于打造一个现代、可扩充、适合工程开发的编辑器环境。 \
+本设定以 **Lua + lazy.nvim（插件管理器）** 为基础，方便长期维护与扩展。
+
+本设定特别适用于：
+- C / C++ / Python / Shell 开发
+- Linux / macOS / WSL 环境
+- 嵌入式开发、BMC / OpenBMC 专案
+- 希望以 Neovim 取代传统 IDE 的开发者
  
  ---
  
@@ -31,35 +33,35 @@
  nvim --version
 ```
 
-下載 / 安裝：
-- 官方網站：https://neovim.io/
+下载/安装：
+- 官方网站：https://neovim.io/
 - GitHub Releases：https://github.com/neovim/neovim/releases
- 
+
 ---
 
-## 倉庫結構
+## 仓库结构
 
-本設定遵循標準的 Neovim Lua 結構：
+本配置遵循标准的 Neovim Lua 目录结构：
 
 ```text
- NeoVim-Config/
-├── init.lua                # 設定入口
- ├── lua/
-│   ├── core/               # 核心設定（options / keymaps / autocmds）
-│   └── plugins/            # 插件設定（由 lazy.nvim 管理）
-└── README.md               # 說明文件
+NeoVim-Config/
+├── init.lua                # 配置入口
+├── lua/
+│   ├── core/               # 核心配置（options / keymaps / autocmds）
+│   └── plugins/            # 插件配置（由 lazy.nvim 管理）
+└── README.md               # 说明文档
 ```
 
 ---
 
-## 快速安裝
+## 快速安装
 
-將設定 clone 到 Neovim 預設設定目錄：
+将仓库 clone 到 Neovim 默认配置目录：
 
 - Linux / macOS / WSL：
 
 ```bash
- git clone https://github.com/JacobCodeShow/NeoVim-Config ~/.config/nvim
+git clone https://github.com/JacobCodeShow/NeoVim-Config ~/.config/nvim
 ```
 
 - Windows（PowerShell）：
@@ -68,120 +70,120 @@
 git clone https://github.com/JacobCodeShow/NeoVim-Config $env:LOCALAPPDATA\nvim
 ```
 
-啟動 Neovim：
- 
+启动 Neovim：
+
 ```bash
- nvim
+nvim
 ```
 
-首次啟動時，lazy.nvim 會自動安裝並同步插件。
- 
+首次启动时，lazy.nvim 会自动安装并同步插件。
+
 ---
 
-## 🔧 External Dependencies
+## 外部依赖（External Dependencies）
 
-Some features require external tools:
+部分功能需要额外工具支持：
 
-- `git`        – plugin management
-- `ripgrep`   – Telescope live_grep
-- `fd`        – Telescope file search
-- `clangd`    – C/C++ LSP (recommended for embedded / system dev)
-- `nodejs`    – required by some LSP servers
+- `git`：插件管理/拉取仓库
+- `ripgrep`：Telescope `live_grep`
+- `fd`：Telescope 文件搜索
+- `clangd`：C/C++ LSP（推荐用于嵌入式/系统开发）
+- `nodejs`：部分 LSP Server 依赖
 
 ### Fedora
+
 ```bash
 sudo dnf install git ripgrep fd-find clang-tools-extra nodejs
 ```
+
 ### Arch
+
 ```bash
 sudo pacman -S git ripgrep fd clang nodejs
 ```
+
 ---
+
 ## 主要特性
 
-- 基於 Lua 的清晰結構，易於維護與擴展
-- 使用 lazy.nvim 進行插件管理，改善啟動效能
-- LSP 支援（例如 clangd、pyright、bashls）
-- Treesitter：更強的語法高亮與語意能力
-- Telescope：檔案/文字的模糊搜尋與快速定位
-- Git 整合（例如 gitsigns）
-- nvim-cmp：自動補全框架
-- 狀態列與檔案樹，提升整體使用體驗
+- 基于 Lua 的清晰结构，易于维护与扩展
+- 使用 lazy.nvim 管理插件，改善启动性能
+- LSP 支持（例如 clangd、pyright、bashls）
+- Treesitter：更强的语法高亮与语义能力
+- Telescope：文件/文本模糊搜索与快速定位
+- Git 集成（例如 gitsigns）
+- nvim-cmp：自动补全框架
+- 状态栏与文件树，提升整体使用体验
 
 ---
 
-## 特別說明
+## 说明
 
-- 本倉庫為個人設定，歡迎 Fork 後依需求客製化
-- 設計重點偏向「開發效率」與「可維護性」
-- 不依賴大型預設框架（如 LazyVim / LunarVim）
- 
+- 本仓库为个人配置，欢迎 Fork 后按需定制
+- 设计重点偏向“开发效率”与“可维护性”
+- 不依赖大型预设框架（如 LazyVim / LunarVim）
+
 ---
 
-## 推薦插件功能一覽
+## 推荐插件功能一览
 
 | 功能 | 描述 |
 | --- | --- |
-| LSP | 語言伺服器：智能補全、診斷與程式碼導航 |
-| nvim-cmp | 自動補全體驗 |
-| Treesitter | 語法樹級高亮與文字物件 |
-| Telescope | 檔案/搜尋快速定位 |
-| gitsigns | Git 狀態與差異顯示 |
-| NvimTree | 側邊檔案瀏覽器 |
-| lualine | 狀態列美化 |
+| LSP | 语言服务器：智能补全、诊断与代码导航 |
+| nvim-cmp | 自动补全体验 |
+| Treesitter | 语法树级高亮与文本对象 |
+| Telescope | 文件/内容搜索与快速定位 |
+| gitsigns | Git 状态与差异显示 |
+| NvimTree | 侧边文件浏览器 |
+| lualine | 状态栏美化 |
 
 ---
-## ⌨️ Key Mappings (Partial)
 
-| Key | Mode | Action |
-|----|----|----|
-| `<leader>e` | Normal | Toggle file tree |
-| `<leader>ff` | Normal | Find files |
-| `<leader>fg` | Normal | Live grep |
-| `<leader>gd` | Normal | Go to definition |
-| `<leader>rn` | Normal | Rename symbol |
+## 快捷键（节选）
+
+| 按键 | 模式 | 动作 |
+| --- | --- | --- |
+| `<leader>e` | Normal | 切换文件树 |
+| `<leader>ff` | Normal | 查找文件 |
+| `<leader>fg` | Normal | 全局搜索（live grep） |
+| `<leader>gd` | Normal | 跳转到定义 |
+| `<leader>rn` | Normal | 重命名符号 |
+
 ---
-## 📦 Plugin Overview
 
-- **Plugin Manager**
-  - lazy.nvim
+## 插件概览
 
-- **LSP & Completion**
-  - nvim-lspconfig
-  - nvim-cmp
-  - LuaSnip
+- **插件管理**：lazy.nvim
+- **LSP 与补全**：nvim-lspconfig、nvim-cmp、LuaSnip
+- **语法与 UI**：nvim-treesitter、lualine.nvim、nvim-tree.lua
+- **搜索与导航**：telescope.nvim
+- **Git**：gitsigns.nvim
 
-- **Syntax & UI**
-  - nvim-treesitter
-  - lualine.nvim
-  - nvim-tree.lua
-
-- **Search & Navigation**
-  - telescope.nvim
-
-- **Git**
-  - gitsigns.nvim
 ---
-## 🩺 Health Check
 
-If something does not work as expected, run:
+## 健康检查（Health Check）
 
-```bash
+如果有功能不符合预期，可运行：
+
+```vim
 :checkhealth
 ```
----
-## 🧪 Compatibility
-
-- ✅ Tested with Neovim **v0.11.5**
-- ⚠️ Older versions are NOT supported
----
-
-## 授權
-
-本專案採用 MIT License，詳見 `LICENSE`。
 
 ---
 
-## 參與貢獻
+## 兼容性
 
-如有建議、發現問題或想貢獻程式碼，歡迎提交 Issue / Pull Request。
+- ✅ 已在 Neovim **v0.11.5** 测试
+- ⚠️ 不支持更低版本
+
+---
+
+## 授权
+
+本项目采用 MIT License，详见 `LICENSE`。
+
+---
+
+## 贡献
+
+如有建议、发现问题或想贡献代码，欢迎提交 Issue / Pull Request。
