@@ -2,7 +2,12 @@
 
 ![Neovim](https://img.shields.io/badge/Neovim-v0.11.5+-blue)
 ![License](https://img.shields.io/github/license/JacobCodeShow/NeoVim-Config)
- 
+
+> This is a **personal, self-maintained Neovim configuration**.
+> It does NOT aim to be a full-featured distribution like LazyVim or LunarVim.
+> The goal is clarity, control, and long-term maintainability.
+
+
 這是我的個人 **Neovim** 設定倉庫，用於打造一個現代、可擴充、適合工程開發的編輯器環境。\
 本設定以 **Lua + lazy.nvim（插件管理器）** 為基礎，方便長期維護與擴展。
  
@@ -73,6 +78,25 @@ git clone https://github.com/JacobCodeShow/NeoVim-Config $env:LOCALAPPDATA\nvim
  
 ---
 
+## 🔧 External Dependencies
+
+Some features require external tools:
+
+- `git`        – plugin management
+- `ripgrep`   – Telescope live_grep
+- `fd`        – Telescope file search
+- `clangd`    – C/C++ LSP (recommended for embedded / system dev)
+- `nodejs`    – required by some LSP servers
+
+### Fedora
+```bash
+sudo dnf install git ripgrep fd-find clang-tools-extra nodejs
+```
+### Arch
+```bash
+sudo pacman -S git ripgrep fd clang nodejs
+```
+---
 ## 主要特性
 
 - 基於 Lua 的清晰結構，易於維護與擴展
@@ -106,6 +130,50 @@ git clone https://github.com/JacobCodeShow/NeoVim-Config $env:LOCALAPPDATA\nvim
 | NvimTree | 側邊檔案瀏覽器 |
 | lualine | 狀態列美化 |
 
+---
+## ⌨️ Key Mappings (Partial)
+
+| Key | Mode | Action |
+|----|----|----|
+| `<leader>e` | Normal | Toggle file tree |
+| `<leader>ff` | Normal | Find files |
+| `<leader>fg` | Normal | Live grep |
+| `<leader>gd` | Normal | Go to definition |
+| `<leader>rn` | Normal | Rename symbol |
+---
+## 📦 Plugin Overview
+
+- **Plugin Manager**
+  - lazy.nvim
+
+- **LSP & Completion**
+  - nvim-lspconfig
+  - nvim-cmp
+  - LuaSnip
+
+- **Syntax & UI**
+  - nvim-treesitter
+  - lualine.nvim
+  - nvim-tree.lua
+
+- **Search & Navigation**
+  - telescope.nvim
+
+- **Git**
+  - gitsigns.nvim
+---
+## 🩺 Health Check
+
+If something does not work as expected, run:
+
+```bash
+:checkhealth
+```
+---
+## 🧪 Compatibility
+
+- ✅ Tested with Neovim **v0.11.5**
+- ⚠️ Older versions are NOT supported
 ---
 
 ## 授權
