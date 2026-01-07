@@ -101,6 +101,14 @@ sudo dnf install git ripgrep fd-find clang-tools-extra nodejs
 ```bash
 sudo pacman -S git ripgrep fd clang nodejs
 ```
+### Ubuntu
+```bash
+sudo apt update && sudo apt upgrade -y && \
+sudo apt install -y git ripgrep fd-find clangd curl build-essential cmake ninja-build pkg-config && \
+sudo ln -sf $(which fdfind) ~/.local/bin/fd && \
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && \
+sudo apt install -y nodejs
+```
 
 ---
 
