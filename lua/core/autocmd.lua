@@ -17,7 +17,6 @@ vim.api.nvim_create_autocmd("BufLeave", {
   end,
 })
 
--- core/autocmds.lua
 local version = require("core.version").version
 
 vim.api.nvim_create_autocmd("VimEnter", {

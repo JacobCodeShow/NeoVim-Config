@@ -8,6 +8,8 @@ local luarc = require("core.NeoConfigModule.luarc")
 
 local M = {}
 
+---@param opts table|nil
+---@return boolean
 function M.run(opts)
   opts = opts or {}
 
@@ -23,6 +25,7 @@ function M.run(opts)
 
   report.finish()
 
+  -- strict 模式：失败即返回 false（不 error）
   if opts.strict then
     return report.fail_count == 0
   end
