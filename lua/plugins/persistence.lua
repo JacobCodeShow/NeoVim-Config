@@ -120,39 +120,14 @@ return {
     pattern = "PersistenceLoadPost",
     callback = function()
         vim.schedule(function()
-            persistence.stop()
             -- 1️⃣ 关闭空窗口
             close_empty_windows()
-
-            -- 2️⃣ 打开并刷新 NvimTree，同时定位到当前 buffer
-            local ok, nvim_tree_api = pcall(require, "nvim-tree.api")
-            if ok then
-                -- 关闭原本存在的 NvimTree 窗口
-                for _, win in ipairs(vim.api.nvim_list_wins()) do
-                local buf = vim.api.nvim_win_get_buf(win)
-                if vim.bo[buf].filetype == "NvimTree" then
-                    vim.api.nvim_win_close(win, true)
-                end
-                end
-
-                -- 打开 NvimTree
-                nvim_tree_api.tree.open()
-
-                -- 定位到当前 buffer 文件
-                nvim_tree_api.tree.find_file({ open = true })
+            if vim.fn.exists(":NvimTreeOpen") == 2 then
+                vim.cmd("silent! NvimTreeOpen")
+                vim.cmd("silent! NvimTreeRefresh")
             end
         end)
     end,
-    })
-
-        ------------------------------------------------------------------
-    -- 3️⃣ 危险行为：cwd 变化 → 立即 stop
-    ------------------------------------------------------------------
-    vim.api.nvim_create_autocmd("DirChanged", {
-      callback = function()
-        persistence.stop()
-        vim.notify("CWD changed, autosave stopped", vim.log.levels.WARN)
-      end,
     })
 
     ------------------------------------------------------------------
