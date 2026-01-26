@@ -108,3 +108,17 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+-- 默认不用鼠标
+vim.opt.mouse = ""
+
+-- 需要时手动开
+vim.keymap.set("n", "<leader>m", function()
+  if vim.o.mouse == "" then
+    -- 如果启用鼠标，会导致无法通过鼠标直接复制
+    vim.opt.mouse = "a"
+    vim.notify("Mouse enabled")
+  else
+    vim.opt.mouse = ""
+    vim.notify("Mouse disabled")
+  end
+end)

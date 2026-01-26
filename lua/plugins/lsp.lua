@@ -22,9 +22,12 @@ return {
 
     local lspconfig = require("lspconfig")
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
     local function mason_cmd(bin)
         return vim.fn.stdpath("data") .. "/mason/bin/" .. bin
     end
+
+    local on_attach = require("core.lsp").on_attach
 
       ------------------------------------------------------------------
       -- Server definitions (pure data)
@@ -47,9 +50,7 @@ return {
       jsonls = {},
 
       lua_ls = {
-        cmd = {
-          cmd = { mason_cmd("lua-language-server") },
-        },
+        cmd = { mason_cmd("lua-language-server") },
         settings = {
           runtime = {
             version = "LuaJIT",
@@ -74,6 +75,7 @@ return {
     for name, config in pairs(servers) do
       vim.lsp.config(name, vim.tbl_deep_extend("force", {
         capabilities = capabilities,
+        on_attach = on_attach,
       }, config))
     end
   end,
