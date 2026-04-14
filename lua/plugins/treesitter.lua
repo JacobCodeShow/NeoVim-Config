@@ -3,17 +3,20 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-
-    -- ⭐ 推荐：启动即加载（Treesitter 是基础设施）
-    event = { "BufReadPost", "BufNewFile" },
+    lazy = false,
 
     config = function ()
-        local ok, configs = pcall(require, "nvim-treesitter.configs")
+        local user_bin = vim.fn.expand("~/.local/bin")
+        if vim.fn.isdirectory(user_bin) == 1 and not vim.env.PATH:find(user_bin, 1, true) then
+            vim.env.PATH = user_bin .. ":" .. vim.env.PATH
+        end
+
+        local ok, treesitter = pcall(require, "nvim-treesitter")
         if not ok then
             return
         end
 
-        configs.setup({
+        treesitter.setup({
             ensure_installed = {
                 "c",
                 "cpp",
@@ -29,7 +32,9 @@ return {
                 "html",
                 "vue",
                 "markdown",
+                "markdown_inline",
             },
+            auto_install = true,
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = false,
