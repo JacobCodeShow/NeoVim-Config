@@ -11,6 +11,8 @@ return {
             vim.env.PATH = user_bin .. ":" .. vim.env.PATH
         end
 
+        local has_tree_sitter_cli = vim.fn.executable("tree-sitter") == 1
+
         local ok, treesitter = pcall(require, "nvim-treesitter")
         if not ok then
             return
@@ -34,7 +36,7 @@ return {
                 "markdown",
                 "markdown_inline",
             },
-            auto_install = true,
+            auto_install = has_tree_sitter_cli,
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = false,

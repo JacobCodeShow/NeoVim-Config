@@ -4,6 +4,47 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Avoid hard failures when a Treesitter parser is temporarily unavailable.
+do
+  local original_treesitter_start = vim.treesitter.start
+
+  vim.treesitter.start = function(bufnr, lang)
+    local ok, result = pcall(original_treesitter_start, bufnr, lang)
+    if ok then
+      return result
+    end
+
+    local buffer = bufnr
+    if buffer == nil or buffer == 0 then
+      buffer = vim.api.nvim_get_current_buf()
+    end
+
+    if vim.api.nvim_buf_is_valid(buffer) then
+      if vim.b[buffer].treesitter_start_failed then
+        return nil
+      end
+      vim.b[buffer].treesitter_start_failed = true
+    end
+
+    vim.schedule(function()
+      local filetype = "current buffer"
+      if vim.api.nvim_buf_is_valid(buffer) then
+        filetype = lang or vim.bo[buffer].filetype or filetype
+      elseif lang then
+        filetype = lang
+      end
+
+      vim.notify(
+        string.format("Treesitter unavailable for %s", filetype),
+        vim.log.levels.WARN,
+        { title = "NeoConfig" }
+      )
+    end)
+
+    return nil
+  end
+end
+
 -- vim.g.neoconfig_sudo = vim.env.SUDO_USER ~= nil
 
 require("core.options")
