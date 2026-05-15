@@ -1,10 +1,6 @@
 -- ~/.config/nvim/lua/plugins/cmp.lua
 return {
   "hrsh7th/nvim-cmp",
---   dependencies = {
---     "hrsh7th/cmp-nvim-lsp",
---     "L3MON4D3/LuaSnip",
---   },
   event = "InsertEnter",
   dependencies = {
     "L3MON4D3/LuaSnip",
@@ -13,9 +9,11 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "rafamadriz/friendly-snippets",
+    "windwp/nvim-autopairs",
   },
   config = function()
     local cmp = require("cmp")
+    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
     local luasnip = require("luasnip")
 
     require("luasnip.loaders.from_vscode").lazy_load()
@@ -56,5 +54,7 @@ return {
         { name = "path" },
       }),
     })
+
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
   end,
 }

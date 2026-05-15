@@ -86,7 +86,7 @@ nvim
 
 - `git`：插件管理/拉取仓库
 - `ripgrep`：Telescope `live_grep`
-- `fd`：Telescope 文件搜索
+- `fd / fdfind`：Telescope 文件搜索
 - `clangd`：C/C++ LSP（推荐用于嵌入式/系统开发）
 - `nodejs`：部分 LSP Server 依赖
 
@@ -105,10 +105,11 @@ sudo pacman -S git ripgrep fd clang nodejs
 ```bash
 sudo apt update && sudo apt upgrade -y && \
 sudo apt install -y git ripgrep fd-find clangd curl build-essential cmake ninja-build pkg-config && \
-sudo ln -sf $(which fdfind) ~/.local/bin/fd && \
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && \
 sudo apt install -y nodejs
 ```
+
+`NeoConfig doctor` 接受 `fd` 或 `fdfind`，Ubuntu 无需额外建立 `fd` 软链接。
 
 ---
 
@@ -154,7 +155,7 @@ sudo apt install -y nodejs
 | `<leader>e` | Normal | 切换文件树 |
 | `<leader>ff` | Normal | 查找文件 |
 | `<leader>fg` | Normal | 全局搜索（live grep） |
-| `<leader>gd` | Normal | 跳转到定义 |
+| `gd` | Normal | 跳转到定义 |
 | `<leader>rn` | Normal | 重命名符号 |
 
 ---

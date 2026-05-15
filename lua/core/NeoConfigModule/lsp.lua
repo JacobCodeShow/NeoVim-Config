@@ -15,9 +15,12 @@ local function ensure_lua_ls()
     end
   end
 
-  local buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_option(buf, "filetype", "lua")
-  vim.api.nvim_set_current_buf(buf)
+  local previous_buf = vim.api.nvim_get_current_buf()
+  local temp_path = vim.fn.tempname() .. ".lua"
+
+  vim.cmd("keepalt edit " .. vim.fn.fnameescape(temp_path))
+
+  local buf = vim.api.nvim_get_current_buf()
 
   local ok = vim.wait(2000, function()
     for _, c in ipairs(vim.lsp.get_active_clients()) do
@@ -28,7 +31,16 @@ local function ensure_lua_ls()
     return false
   end, 50)
 
-  vim.api.nvim_buf_delete(buf, { force = true })
+  if vim.api.nvim_buf_is_valid(previous_buf) then
+    vim.api.nvim_set_current_buf(previous_buf)
+  end
+
+  if vim.api.nvim_buf_is_valid(buf) then
+    vim.api.nvim_buf_delete(buf, { force = true })
+  end
+
+  vim.fn.delete(temp_path)
+
   return ok
 end
 

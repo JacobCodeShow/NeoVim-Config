@@ -10,12 +10,13 @@ local function ensure_lua_ls()
     end
   end
 
-  -- 创建一个临时 lua buffer 触发 LSP
-  local buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_name(buf, "[NeoConfig Check]")
-  vim.api.nvim_buf_set_option(buf, "filetype", "lua")
+  -- 使用真实临时文件触发 lua_ls，避免 scratch buffer 误报
+  local previous_buf = vim.api.nvim_get_current_buf()
+  local temp_path = vim.fn.tempname() .. ".lua"
 
-  vim.api.nvim_set_current_buf(buf)
+  vim.cmd("keepalt edit " .. vim.fn.fnameescape(temp_path))
+
+  local buf = vim.api.nvim_get_current_buf()
 
   -- 等待 lua_ls attach（最多 2 秒）
   local ok = vim.wait(2000, function()
@@ -30,8 +31,16 @@ local function ensure_lua_ls()
   if not ok then
     return nil
   end
+  if vim.api.nvim_buf_is_valid(previous_buf) then
+    vim.api.nvim_set_current_buf(previous_buf)
+  end
 
-  -- 清理 buffer
+
+  if vim.api.nvim_buf_is_valid(buf) then
+    vim.api.nvim_buf_delete(buf, { force = true })
+  end
+
+  vim.fn.delete(temp_path)
   vim.api.nvim_buf_delete(buf, { force = true })
 
   -- 返回 client

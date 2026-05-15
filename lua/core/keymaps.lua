@@ -47,8 +47,6 @@ map("n", "<C-b>", "<cmd>NvimTreeFindFileToggle<CR>", {
   silent = true,
 })
 
-map("n", "<leader>e", ":NvimTreeFindFile<CR>", opts)
-
 
 --------------------------------------------------
 -- 注释（Ctrl + /）

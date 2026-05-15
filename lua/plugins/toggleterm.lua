@@ -38,9 +38,6 @@ return {
     "akinsho/toggleterm.nvim",
     lazy = false,        -- ✅ 关键：提前加载
     version = "*",
-    keys = {
-      { "<C-\\>", "<cmd>ToggleTerm<CR>", desc = "Toggle Terminal" },
-    },
     opts = {
       open_mapping = nil,
       direction = "horizontal",     -- ⭐ 永远底部

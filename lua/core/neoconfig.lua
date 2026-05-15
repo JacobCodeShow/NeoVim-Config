@@ -53,7 +53,7 @@ handlers.doctor = function(arg)
     strict = arg == "--strict",
     fix = arg == "--fix",
   }
-  local ok = Doctor.run({ opts })
+  local ok = Doctor.run(opts)
 
   if opts.strict and not ok then
     if vim.fn.has("gui_running") == 1 or vim.fn.has("nvim") == 1 then

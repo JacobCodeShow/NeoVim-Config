@@ -1,8 +1,6 @@
 -- ~/.config/nvim/lua/core/NeoConfigModule/diagnostics.lua
 
 local report = require("core.NeoConfigModule.report")
-
-local report = require("core.NeoConfigModule.report")
 local luarc = require("core.NeoConfigModule.luarc")
 
 local M = {}
@@ -12,15 +10,13 @@ function M.check()
 
   local errors = {}
 
-  function M.check()
   if luarc.exists() then
-      report.pass("~/.config/nvim/.luarc.json")
+  report.pass("~/.config/nvim/.luarc.json")
   else
-      report.fail(
+  report.fail(
       "~/.config/nvim/.luarc.json missing",
       "Will be generated automatically on startup"
-      )
-  end
+  )
   end
 
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
